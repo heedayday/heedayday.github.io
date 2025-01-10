@@ -1,1 +1,1 @@
-# 확실하게 정리하는 개발 지식
+**[heedayday.github.io](https://heedayday.github.io/)** 해당 링크로 github.io블로그 확인이 가능합니다
