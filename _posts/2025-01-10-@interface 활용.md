@@ -2,71 +2,66 @@
 layout: post
 ---
 
-A clean and responsive jekyll theme. Designing for legibility and accessibility.
+@interface를 사용하여 사용자 정의 어노테이션을 생성할 수 있다
 
-## Installation
+## 메타 어노테이션: 어노테이션을 위한 어노테이션
 
-Add this line to your Jekyll site's `Gemfile`:
+@Retention
 
-
-```ruby
-gem "jekyll-theme-mint"
+```java
+@Retention(SOURCE)    어노테이션이 소스 코드에만 이용 가능하며 컴파일 후에는 사라짐
+@Retention(CLASS)     어노테이션이 .class 파일에 존재하지만 런타임 시에는 사라짐
+@Retention(RUMTIME)   어노테이션이 컴파일러와 런타임에 사용 가능
 ```
 
-And add this line to your Jekyll site's `_config.yml`:
+@Target
 
-```yaml
-theme: jekyll-theme-mint
+```java
+@Target(ElementType.TYPE)               클래스의 어떤 요소에나 적용 가능, 기본값
+@Target(ElementType.FIELD)              클래스의 특정 필드
+@Target(ElementType.METHOD)             클래스의 메서드
+@Target(ElementType.PARAMETER)          메서드의 파라미터
+@Target(ElementType.CONSTRUCTOR)        생성자
+@Target(ElementType.LOCAL_VARIABLE)     로컬 변수
+@Target(ElementType.ANNOTATION_TYPE)    어노테이션 타입
 ```
 
-And then execute:
+@Inherited<br>
+어노테이션 정보가 서브 클래스에도 상속가능 여부
 
-    $ bundle
 
-Or install it yourself as:
+<br>
+<br>
 
-    $ gem install jekyll-theme-mint
 
-## Usage
+## 예시
 
-### Add social links
+@SpringBootApplication 어노테이션
 
-Edit `_config.yml` file to add your social links.
+```java
+package com.ryan.spring_boot_rest_api;
 
-```yaml
-github_username:    your_name
-twitter_username:   your_name
-facebook_username:  your_name
-dribbble_username:  your_name
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootRestApiApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootRestApiApplication.class, args);
+	}
+}
 ```
 
-### Enable Disqus
-
-Edit `_config.yml` file to add your Disqus short name and you can enable Disqus on your site.
-
-```yaml
-disqus_shortname: your_disqus_shortname
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+public @interface SpringBootApplication {
+...
+}
 ```
-
-You can also disable Disqus on specific post by `comments: false` to the post's Front Matter.
-
-### Enable Google Analytics
-
-Edit `_config.yml` file to add your google analytics tracking id and you can enable google analytics on your site.
-
-```yaml
-google_analytics: your_google_analystics_tracker_id
-```
-
-
-## Development
-
-To set up your environment to develop this theme, run `bundle install`.
-
-For test, you can run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`.
-
-For more information you can see here <https://jekyllrb.com/docs/themes/>.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
